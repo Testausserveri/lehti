@@ -1,23 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
 * {
   box-sizing: border-box;
 }
 
+p, h1, h2, h3 {
+  font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: #AAAAFF
+}
+
+code {
+  background-color: #000000;
+  display: block;
+  overflow-wrap: normal;
+}
+
 body {
   overflow-x: hidden;
+  background-color: #000000;
 }
 
 .controls {
   margin: auto;
   width: max-content;
+  color: #FFFFFF;
 }
 
-.page-text {
+.columns {
   column-width: 200px;
-  height: 100%;
 }
 
 img {
   max-width: 100%;
+}
+
+.frontpage h1 {
+  margin: 0px;
+  font-size: 64px;
+}
+
+.info {
+  display: flex;
+  font-size: 0.8em;
+  width: 100%;
+}
+
+.info div {
+  flex-grow: 1;
 }
 
 .flip-book {
@@ -32,8 +63,8 @@ img {
 
 .page {
   padding: 20px;
-  background-color: #ffffff;
-  color:#000000;
+  background-color: #161b2b;
+  color: #FFFFFF;
   border: solid 1px #c2b5a3;
   overflow: hidden
 }
@@ -51,7 +82,9 @@ img {
   height: 30px;
   font-size: 100%;
   text-transform: uppercase;
-  text-align: center
+  text-align: left;
+  margin: 0px;
+  padding: 0px;
 }
 
 .page .page-content .page-image {
@@ -66,7 +99,7 @@ img {
   flex-grow: 1;
   font-size: 80%;
   text-align: justify;
-  margin-top: 10px;
+  margin-top: 0px;
   padding-top: 10px;
   box-sizing: border-box;
   border-top: solid 1px #f4e8d7
@@ -81,12 +114,12 @@ img {
 
 .page.--left {
   border-right: 0;
-  box-shadow: inset -7px 0 30px -7px rgba(0, 0, 0, 0.4)
+  box-shadow: inset -7px 0 30px -7px rgba(0, 0, 50, 1)
 }
 
 .page.--right {
   border-left: 0;
-  box-shadow: inset 7px 0 30px -7px rgba(0, 0, 0, 0.4)
+  box-shadow: inset 7px 0 30px -7px rgba(0, 0, 50, 1)
 }
 
 .page.--right .page-footer {

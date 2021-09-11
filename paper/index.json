@@ -1,8 +1,26 @@
 [
   {
     "file": "1.md",
-    "title": "Testi",
+    "title": "Etusivu",
     "author": "Someone",
-    "columns": 2
+    "style": "columns"
+  },
+  {
+    "file": "2.md",
+    "title": "Etusivu",
+    "author": "Someone",
+    "style": "columns"
+  },
+  {
+    "file": "3.md",
+    "title": "Etusivu",
+    "author": "Someone",
+    "style": "columns"
+  },
+  {
+    "file": "4.md",
+    "title": "Testauslehti",
+    "author": "Someone",
+    "style": ""
   }
 ]

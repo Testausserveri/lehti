@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
             minHeight: 420,
             maxHeight: 1350,
 
-            maxShadowOpacity: 0.25, // Half shadow intensity
+            maxShadowOpacity: 1, // Half shadow intensity
             showCover: true,
             mobileScrollSupport: false, // disable content scrolling on mobile devices
 
@@ -51,22 +51,5 @@ document.addEventListener('DOMContentLoaded', function() {
     pageFlip.on("flip", (e) => {
         document.querySelector(".page-current").innerText = e.data + 1;
     });
-
-
-    let md = window.markdownit();
-    for (let i=1;i<=1;i++) {
-        let content = loadFile(`paper/${i}.md`)
-        let result = md.render(content);
-        let page = document.createElement("div");
-        page.setAttribute('class','page')
-        page.innerHTML = `
-<div class="page-content>
-    <div class="page-text>
-        ${content}
-    </div>
-    <div class="page-footer">${i+1}</div>
-</div>`
-        document.getElementById('demoBookExample').appendChild(page);
-    }
 });
 
