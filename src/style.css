@@ -1,20 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@900&family=Ubuntu+Mono&family=Ubuntu:wght@300&display=swap');
+
 * {
   box-sizing: border-box;
-}
-
-p, h1, h2, h3 {
   font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
 }
 
+h1, h2, h3 {
+  font-family: 'Poppins', sans-serif;
+}
+
 a {
-  color: #AAAAFF
+  color: #F0F600
 }
 
 code {
-  background-color: #000000;
+  background-color:#0d0f17;
+  border-radius: 8px;
   display: block;
+  color: #BCF8EC;
   overflow-wrap: normal;
+  padding: 8px;
+  font-family: 'Ubuntu Mono', monospace;
 }
 
 body {
@@ -39,6 +45,7 @@ img {
 .frontpage h1 {
   margin: 0px;
   font-size: 64px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .info {

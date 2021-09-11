@@ -11,7 +11,7 @@ function loadFile(filePath) {
 }
   
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
 
     const pageFlip = new PageFlip(
         document.getElementById("demoBookExample"),
@@ -51,5 +51,15 @@ document.addEventListener('DOMContentLoaded', function() {
     pageFlip.on("flip", (e) => {
         document.querySelector(".page-current").innerText = e.data + 1;
     });
-});
 
+    document.addEventListener('keydown', (e) => {
+        switch (e.key) {
+            case "ArrowLeft":
+                pageFlip.flipPrev();
+                break;
+            case "ArrowRight":
+                pageFlip.flipNext();
+                break;
+        }
+    });
+});
