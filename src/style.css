@@ -36,6 +36,7 @@ body {
 
 .columns {
   column-width: 200px;
+  column-fill: auto;
 }
 
 img {
@@ -61,7 +62,9 @@ img {
 .flip-book {
   margin: 0 auto;
   display: none;
-  z-index: 100
+  z-index: 100;
+  transition: translate 0.5s;
+  translate: calc(-25% - 0.5px)
 }
 
 .html-book {

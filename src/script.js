@@ -1,16 +1,3 @@
-//thank you again, stackoverflow.
-function loadFile(filePath) {
-    var result = null;
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", filePath, false);
-    xmlhttp.send();
-    if (xmlhttp.status==200) {
-        result = xmlhttp.responseText;
-    }
-    return result;
-}
-  
-
 document.addEventListener('DOMContentLoaded', () => {
 
     const pageFlip = new PageFlip(
@@ -50,6 +37,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // triggered by page turning
     pageFlip.on("flip", (e) => {
         document.querySelector(".page-current").innerText = e.data + 1;
+        if (e.data==0) {
+            document.getElementById('demoBookExample').style="translate: calc(-25% - 0.5px)";
+        } else if (e.data>=pageFlip.getPageCount()-2) {
+            document.getElementById('demoBookExample').style="translate: calc(25% - 0.5px)";
+        } else {
+            document.getElementById('demoBookExample').style="translate: 0px";
+        }
     });
 
     document.addEventListener('keydown', (e) => {

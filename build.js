@@ -54,6 +54,7 @@ let html = `
 
 <head>
     <title>Testauslehti</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
       ${contents.style}
     </style>
@@ -76,7 +77,6 @@ let html = `
 </body>
 <script>
   ${contents.pageflip}
-  ${contents.markdown}
   ${contents.script}
 </script>
 </html>
