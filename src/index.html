@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html lang="fi">
+
+<head>
+    <title>Testauslehti</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container controls">
+        <div>
+            <button type="button" class="btn-prev">Previous page</button>
+            [<span class="page-current">1</span> of <span class="page-total">-</span>]
+            <button type="button" class="btn-next">Next page</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="flip-book" id="demoBookExample">
+            <div class="page">
+                <div class="page-content">
+                    <h2 class="page-header">Etusivu</h2>
+                    <div class="page-text">
+                        <p>Ihan tiedoksesi, tämä on lehti</p>
+                    </div>
+                    <div class="page-footer">1</div>
+                </div>
+            </div>
+            <div class="page">
+                <div class="page-content">
+                    <h2 class="page-header">Otsikko</h2>
+                    <div class="page-text">
+                        <p>Kas tervehdys, tämä on testi</p>
+                    </div>
+                    <div class="page-footer">2</div>
+                </div>
+            </div>
+            <div class="page">
+                <div class="page-content">
+                    <h2 class="page-header">Otsikko</h2>
+                    <div class="page-text">
+                        <p>Kas tervehdys, tämä on testi (edelleen)</p>
+                        <p>Automaattinen palstoitus taitaa rikkoa näin lyhyen tekstin.</p>
+                    </div>
+                    <div class="page-footer">3</div>
+                </div>
+            </div>
+            <div class="page">
+                <div class="page-content">
+                    <h2 class="page-header">Viimeinen sivu</h2>
+                    <div class="page-text">
+                        <p>Kiitoksia lukemisesta</p>
+                        <p>Kiitokset minulle paskasta, ja Antille jostakin pikkujutusta</p>
+                    </div>
+                    <div class="page-footer">4</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./pageflip.js"></script>
+<script src="./markdown.js"></script>
+<script src="./script.js"></script>
+
+</html>
