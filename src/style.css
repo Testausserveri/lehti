@@ -64,7 +64,7 @@ img {
   display: none;
   z-index: 100;
   transition: translate 0.5s;
-  translate: calc(-25% - 0.5px)
+  translate: 100%;
 }
 
 .html-book {

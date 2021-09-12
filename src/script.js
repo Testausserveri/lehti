@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     const pageFlip = new PageFlip(
-        document.getElementById("demoBookExample"),
+        document.getElementById("book"),
         {
             width: 315, // base page width
             height: 420, // base page height
@@ -39,14 +39,14 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector(".page-current").innerText = e.data + 1;
         if (pageFlip.getOrientation()=='landscape') {
             if (e.data==0) {
-                document.getElementById('demoBookExample').style="translate: calc(-25% - 0.5px)";
+                document.getElementById('book').style=`translate: calc(-25%${(document.getElementById('book-container').offsetWidth%2==0) ? ' - 0.5px':''}`;
             } else if (e.data>=pageFlip.getPageCount()-2) {
-                document.getElementById('demoBookExample').style="translate: calc(25% - 0.5px)";
+                document.getElementById('book').style=`translate: calc(25%${(document.getElementById('book-container').offsetWidth%2==0) ? ' - 0.5px':''}`;
             } else {
-                document.getElementById('demoBookExample').style="translate: 0px";
+                document.getElementById('book').style="translate: 0px";
             }
         } else {
-            document.getElementById('demoBookExample').style="translate: 0px";
+            document.getElementById('book').style="translate: 0px";
         }
     });
 
@@ -60,4 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
         }
     });
+
+    if (pageFlip.getOrientation()=='landscape') {
+        document.getElementById('book').style=`translate: calc(-25%${(document.getElementById('book-container').offsetWidth%2==0) ? ' - 0.5px':''}`;
+    } else {
+        document.getElementById('book').style="translate: 0px";
+    }
 });

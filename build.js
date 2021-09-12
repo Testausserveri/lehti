@@ -71,8 +71,8 @@ let html = htmlminify(`
         </div>
     </div>
 
-    <div class="container">
-        <div class="flip-book" id="demoBookExample">
+    <div class="container" id="book-container">
+        <div class="flip-book" id="book">
           ${contents.paper}
         </div>
     </div>
