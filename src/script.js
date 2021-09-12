@@ -1,6 +1,8 @@
+let pageFlip = {};
+
 document.addEventListener('DOMContentLoaded', () => {
 
-    const pageFlip = new PageFlip(
+    pageFlip = new PageFlip(
         document.getElementById("book"),
         {
             width: 315, // base page width
@@ -40,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (pageFlip.getOrientation()=='landscape') {
             if (e.data==0) {
                 document.getElementById('book').style=`left: -25%`;
-            } else if (e.data>=pageFlip.getPageCount()-2) {
+            } else if (e.data>=pageFlip.getPageCount()-2 && pageFlip.getPageCount()%2==0) {
                 document.getElementById('book').style=`left: 25%`;
             } else {
                 document.getElementById('book').style="left: 0px";

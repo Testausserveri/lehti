@@ -1,55 +1,134 @@
 let fs = require('fs')
+let path = require('path')
 let md = require('markdown-it')();
+const imageToBase64 = require('image-to-base64');
 
 let htmlminify = require('html-minifier').minify;
 
+async function build() {
 
-let contents = {
-  pageflip: fs.readFileSync('src/pageflip.js'),
-  script: fs.readFileSync('src/script.js'),
-  style: fs.readFileSync('src/style.css'),
-  paper: ""
-}
+  let contents = {
+    pageflip: fs.readFileSync('src/pageflip.js'),
+    script: fs.readFileSync('src/script.js'),
+    style: fs.readFileSync('src/style.css'),
+  }
+  let articles = [];
+  let paper = [];
+  let magazine = JSON.parse(fs.readFileSync('paper/meta.json'));
 
-let index = JSON.parse(fs.readFileSync('paper/index.json'))
-for (const [i, data] of index.entries()) {
-  let raw = fs.readFileSync(`./paper/${data.file}`,'utf8');
-  let text = md.render(raw);
-  if (i==0) {
-    contents.paper += `
-    <div class="page">
+  let pn = 1;
+
+  for (let article of fs.readdirSync('paper')) {
+    if (article != 'meta.json') {
+      let data = JSON.parse(fs.readFileSync(`paper/${article}/meta.json`))
+      data.pages = [];
+      data.images = [];
+      data.code = [];
+      data.value = 0;
+      data.page = pn;
+      for (let file of fs.readdirSync(`paper/${article}`)) {
+        let name = file.split('.')
+        if (file != "meta.json") {
+          if (name[0] == "thumbnail") {
+            data.thumb = await imageToBase64(`paper/${article}/${file}`);
+          } else if (name[1] == "md") {
+            let content = fs.readFileSync(`paper/${article}/${file}`, 'utf8')
+            data.pages[name[0]-1] = content;
+            data.value += content.length;
+          } else if (name[1] == 'jpg' || name[1] == 'png' || name[1] == 'webp') {
+            let base64 = await imageToBase64(`paper/${article}/${file}`);
+            data.images.push(base64);
+          } else {
+            data.code.push(fs.readFileSync(`paper/${article}/${file}`, 'utf8'))
+          }
+        }
+      }
+      articles.push(data);
+      pn+=data.pages.length
+    }
+  }
+
+  pn = 1;
+
+  for (const [index, data] of articles.entries()) {
+    let imgi = 0;
+    let codei = 0;
+    let imgpp = Math.ceil(data.pages.length/data.images.length);
+    let codepp = Math.ceil(data.pages.length/data.images.length);
+
+    for (const [i, page] of data.pages.entries()) {
+      let text = md.render(page);
+      let attachments = [];
+      for (let x=imgi;(x<imgi+imgpp && x<data.images.length);x++) {
+        attachments.push(`<img src="data:image/png;base64,${data.images[x]}">`)
+        imgi++;
+      }
+      for (let x=codei;(x<codei+codepp && x<data.code.length);x++) {
+        attachments.push(`<pre><code>${data.code[x]}</pre></code>`)
+        codei++;
+      }
+
+      paper.push(`
+      <div class="page">
+          <div class="page-content">
+              <h2 class="page-header">${data.title}</h2>
+              ${(attachments.length>0) ? `
+              <div class="page-attachments">
+                ${attachments.join('')}
+              </div>`:''}
+              <div class="page-text columns">
+                  ${text}
+              </div>
+              <div class="page-footer">${pn+1}</div>
+          </div>
+      </div>
+    `)
+      pn++;
+    }
+  }
+
+  articles.sort((a,b) => {
+    if (a.thumb && b.thumb) {return a.value-b.value}
+    else if (a.thumb && !b.thumb) {return -1}
+    else if (!a.thumb && b.thumb) {return 1}
+    else {return 0}
+  });
+
+  let featured = [];
+  for (let x=0;(x<6 && x<articles.length);x++) {
+    let data = articles[x];
+    featured.push(`
+      <div class="featured-content">
+        <h2>${data.title}</h2>
+        ${(data.thumb) ? `<img class="thumb" src="data:image/png;base64,${data.thumb}"b>`:''}
+        <p>${data.description}</p>
+        <a onclick="pageFlip.flip(${data.page})">Sivu ${data.page+1}</a>
+      </div>
+    `)
+  }
+  paper.unshift(`
+   <div class="page">
         <div class="page-content">
           <div class="frontpage">
-              <h1>Testaaja</h1>
-              <div class="info">
-                <div>- Lehti joka devaajalle</div>
-                <div>Nro 0, Torstaina 1. tammikuuta 1970</div>
-                <div>Yhteystietoja tähän</div>
-              </div>
+            <h1>Testaaja</h1>
+            <div class="info">
+              <div>- Lehti joka devaajalle</div>
+              <div>Nro ${magazine.issue}, ${magazine.date}</div>
+              <div>Yhteystietoja tähän</div>
             </div>
-            <div class="page-text ${data.style}">
-                ${text}
+          </div>
+            <div class="page-text columns">
+              ${magazine.frontpage}
             </div>
-            <div class="page-footer">${i+1}</div>
+            <div class="featured">
+                ${featured.join('\n')}
+            </div>
+            <div class="page-footer">${1}</div>
         </div>
     </div>
-    `
-  } else {
-    contents.paper += `
-    <div class="page">
-        <div class="page-content">
-            <h2 class="page-header">${data.title}</h2>
-            <div class="page-text ${data.style}">
-                ${text}
-            </div>
-            <div class="page-footer">${i+1}</div>
-        </div>
-    </div>
-    `
-  }
-}
+  `);
 
-let html = htmlminify(`
+  let html = htmlminify(`
 <!DOCTYPE html>
 
 <html lang="fi">
@@ -66,14 +145,14 @@ let html = htmlminify(`
     <div class="container controls">
         <div>
             <button type="button" class="btn-prev">Previous page</button>
-            [<span class="page-current">1</span> of <span class="page-total">-</span>]
+            [<span class="page-current">1</span> / <span class="page-total">-</span>]
             <button type="button" class="btn-next">Next page</button>
         </div>
     </div>
 
     <div class="container" id="book-container">
         <div class="flip-book" id="book">
-          ${contents.paper}
+          ${paper.join(`\n`)}
         </div>
     </div>
 </body>
@@ -83,9 +162,12 @@ let html = htmlminify(`
 </script>
 </html>
 `, {
-  minifyCSS: true,
-  minifyJS: true,
-  collapseWhitespace: true
-});
+    minifyCSS: true,
+    minifyJS: true,
+    collapseWhitespace: true
+  });
 
-fs.writeFileSync('built.html', html);
+  fs.writeFileSync('built.html', html);
+}
+
+build()

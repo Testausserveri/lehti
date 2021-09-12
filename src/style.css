@@ -9,8 +9,18 @@ h1, h2, h3 {
   font-family: 'Poppins', sans-serif;
 }
 
+h1 {
+  column-span: all;
+}
+
 a {
-  color: #F0F600
+  color: #F0F600;
+  text-decoration: none;
+}
+
+a:hover {
+  cursor: pointer;
+  text-decoration: solid underline #F0F600;
 }
 
 code {
@@ -21,6 +31,12 @@ code {
   overflow-wrap: normal;
   padding: 8px;
   font-family: 'Ubuntu Mono', monospace;
+}
+
+pre {
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 body {
@@ -37,6 +53,7 @@ body {
 .columns {
   column-width: 250px;
   column-fill: auto;
+  column-count: 3;
 }
 
 img {
@@ -97,13 +114,39 @@ img {
   text-align: left;
   margin: 0px;
   padding: 0px;
+  margin-bottom: 10px;
+  border-bottom: solid 1px #f4e8d7
 }
 
-.page .page-content .page-image {
-  height: 100%;
-  background-size: contain;
-  background-position: center center;
-  background-repeat: no-repeat
+.page .page-content .frontpage {
+  margin-bottom: 10px;
+  border-bottom: solid 1px #f4e8d7
+}
+
+.page .page-content .featured {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 2fr));
+  grid-gap: 8px;
+  margin-bottom: 64px;
+}
+
+.featured-content {
+  background-color:#0d0f17;
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.featured-content p {
+  flex-grow: 1;
+}
+
+.page .page-content .page-attachments {
+  flex-shrink: 6;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-gap: 8px;
 }
 
 .page .page-content .page-text {
@@ -112,16 +155,15 @@ img {
   font-size: 80%;
   text-align: justify;
   margin-top: 0px;
-  padding-top: 10px;
+  padding-top: 0px;
   box-sizing: border-box;
-  border-top: solid 1px #f4e8d7
 }
 
 .page .page-content .page-footer {
   height: 30px;
   border-top: solid 1px #f4e8d7;
   font-size: 80%;
-  color: #998466
+  color: #ffffff
 }
 
 .page.--left {
