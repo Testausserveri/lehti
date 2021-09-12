@@ -1,6 +1,8 @@
 let fs = require('fs')
 let md = require('markdown-it')();
 
+let htmlminify = require('html-minifier').minify;
+
 
 let contents = {
   pageflip: fs.readFileSync('src/pageflip.js'),
@@ -47,7 +49,7 @@ for (const [i, data] of index.entries()) {
   }
 }
 
-let html = `
+let html = htmlminify(`
 <!DOCTYPE html>
 
 <html lang="fi">
@@ -80,6 +82,10 @@ let html = `
   ${contents.script}
 </script>
 </html>
-`
+`, {
+  minifyCSS: true,
+  minifyJS: true,
+  collapseWhitespace: true
+});
 
 fs.writeFileSync('built.html', html);

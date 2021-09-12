@@ -8,10 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             size: "stretch",
             // set threshold values:
-            minWidth: 315,
+            minWidth: 600,
             maxWidth: 1000,
             minHeight: 420,
-            maxHeight: 1350,
+            maxHeight: 3000,
 
             maxShadowOpacity: 1, // Half shadow intensity
             showCover: true,
@@ -37,10 +37,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // triggered by page turning
     pageFlip.on("flip", (e) => {
         document.querySelector(".page-current").innerText = e.data + 1;
-        if (e.data==0) {
-            document.getElementById('demoBookExample').style="translate: calc(-25% - 0.5px)";
-        } else if (e.data>=pageFlip.getPageCount()-2) {
-            document.getElementById('demoBookExample').style="translate: calc(25% - 0.5px)";
+        if (pageFlip.getOrientation()=='landscape') {
+            if (e.data==0) {
+                document.getElementById('demoBookExample').style="translate: calc(-25% - 0.5px)";
+            } else if (e.data>=pageFlip.getPageCount()-2) {
+                document.getElementById('demoBookExample').style="translate: calc(25% - 0.5px)";
+            } else {
+                document.getElementById('demoBookExample').style="translate: 0px";
+            }
         } else {
             document.getElementById('demoBookExample').style="translate: 0px";
         }
