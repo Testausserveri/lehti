@@ -39,14 +39,14 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector(".page-current").innerText = e.data + 1;
         if (pageFlip.getOrientation()=='landscape') {
             if (e.data==0) {
-                document.getElementById('book').style=`translate: calc(-25%${(document.getElementById('book-container').offsetWidth%2==0) ? ' - 0.5px':''}`;
+                document.getElementById('book').style=`left: -25%`;
             } else if (e.data>=pageFlip.getPageCount()-2) {
-                document.getElementById('book').style=`translate: calc(25%${(document.getElementById('book-container').offsetWidth%2==0) ? ' - 0.5px':''}`;
+                document.getElementById('book').style=`left: 25%`;
             } else {
-                document.getElementById('book').style="translate: 0px";
+                document.getElementById('book').style="left: 0px";
             }
         } else {
-            document.getElementById('book').style="translate: 0px";
+            document.getElementById('book').style="left: 0px";
         }
     });
 
@@ -62,8 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (pageFlip.getOrientation()=='landscape') {
-        document.getElementById('book').style=`translate: calc(-25%${(document.getElementById('book-container').offsetWidth%2==0) ? ' - 0.5px':''}`;
+        document.getElementById('book').style=`left: -25%`;
     } else {
-        document.getElementById('book').style="translate: 0px";
+        document.getElementById('book').style="left: 0px";
     }
 });
