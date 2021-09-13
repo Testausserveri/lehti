@@ -58,9 +58,10 @@ code {
   overflow-wrap: normal;
   padding: 8px;
   font-family: 'Ubuntu Mono', monospace;
+  font-size: 80%;
 }
 
-pre {
+pre, p {
   -webkit-column-break-inside: avoid;
   page-break-inside: avoid;
   break-inside: avoid;
@@ -169,27 +170,19 @@ img {
 }
 
 .page .page-content .page-attachments {
-  flex-shrink: 6;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  grid-gap: 8px;
-  justify-items: center;
+  flex-shrink: 1;
+  display: flex;
+  flex-flow: row wrap;
 }
 
 .page-attachments img {
   max-width: 70%;
+  margin: auto;
 }
-
-.page-attachments pre {
-  width: 100%;
-}
-
 
 .page .page-content .page-text {
   height: 50%;
   flex-grow: 1;
-  font-size: 80%;
-  text-align: justify;
   margin-top: 0px;
   padding-top: 0px;
   box-sizing: border-box;
@@ -231,5 +224,8 @@ img {
   }
   .page {
     margin-bottom: 32px;
+  }
+  .page-attachments img {
+    max-width: 100%;
   }
 }

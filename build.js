@@ -22,8 +22,7 @@ async function build() {
     if (article != 'meta.json') {
       let data = JSON.parse(fs.readFileSync(`paper/${article}/meta.json`))
       data.pages = [];
-      data.images = [];
-      data.code = [];
+      data.attachments = [];
       data.value = 0;
       data.page = pn;
       for (let file of fs.readdirSync(`paper/${article}`)) {
@@ -37,9 +36,18 @@ async function build() {
             data.value += content.length;
           } else if (name[1] == 'jpg' || name[1] == 'png' || name[1] == 'webp') {
             let base64 = await imageToBase64(`paper/${article}/${file}`);
-            data.images.push(base64);
+            data.attachments.push({
+              type: 'image',
+              ext: name[1],
+              data: base64
+            });
           } else {
-            data.code.push(fs.readFileSync(`paper/${article}/${file}`, 'utf8'))
+            let code = fs.readFileSync(`paper/${article}/${file}`, 'utf8');
+            data.attachments.push({
+              type: 'code',
+              ext: name[1],
+              data: code
+            });
           }
         }
       }
@@ -51,30 +59,28 @@ async function build() {
   pn = 1;
 
   for (const [index, data] of articles.entries()) {
-    let imgi = 0;
-    let codei = 0;
-    let imgpp = Math.ceil(data.pages.length/data.images.length);
-    let codepp = Math.ceil(data.pages.length/data.images.length);
+    let attachpp = Math.ceil(data.attachments.length/data.pages.length);
 
     for (const [i, page] of data.pages.entries()) {
       let text = md.render(page);
-      let attachments = [];
-      for (let x=imgi;(x<imgi+imgpp && x<data.images.length);x++) {
-        attachments.push(`<img src="data:image/png;base64,${data.images[x]}">`)
-        imgi++;
+      let attach = [];
+      for (let x=i*attachpp;(x<data.attachments.length && x<(i*attachpp)+attachpp);x++) {
+        let attachment = data.attachments[x]
+        if (attachment.type=='image') {
+          attach.push(`<img src="data:image/png;base64,${attachment.data}">`)
+        } else if (attachment.type=='code') {
+          attach.push(`<pre><code>${attachment.data}</code></pre>`)
+        }
       }
-      for (let x=codei;(x<codei+codepp && x<data.code.length);x++) {
-        attachments.push(`<pre><code>${data.code[x]}</pre></code>`)
-        codei++;
-      }
+
 
       paper.push(`
       <div class="page">
           <div class="page-content">
               <h2 class="page-header">${data.title}</h2>
-              ${(attachments.length>0) ? `
+              ${(attach.length>0) ? `
               <div class="page-attachments">
-                ${attachments.join('')}
+                ${attach.join('')}
               </div>`:''}
               <div class="page-text columns">
                   ${text}
