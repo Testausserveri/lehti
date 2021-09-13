@@ -136,23 +136,23 @@ async function build() {
 <head>
     <title>Testauslehti</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
     <style>
       ${contents.style}
     </style>
 </head>
 
 <body>
-    <div class="container controls">
-        <div>
-            <button type="button" class="btn-prev">Previous page</button>
-            [<span class="page-current">1</span> / <span class="page-total">-</span>]
-            <button type="button" class="btn-next">Next page</button>
-        </div>
-    </div>
-
     <div class="container" id="book-container">
         <div class="flip-book" id="book">
           ${paper.join(`\n`)}
+        </div>
+    </div>
+    <div class="container controls">
+        <div>
+            <button type="button" class="btn prev">&lt</button>
+            [<span class="page-current">1</span> / <span class="page-total">-</span>]
+            <button type="button" class="btn next">&gt</button>
         </div>
     </div>
 </body>

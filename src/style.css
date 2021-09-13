@@ -5,12 +5,39 @@
   font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
 }
 
+.btn {
+  position: fixed;
+  top: 50%;
+  font-size: 32px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: rgb(0, 0, 0);
+  z-index: 100;
+  width: 2em;
+  height: 2em;
+  transition: background-color 0.5s;
+  border: none;
+}
+
+.btn:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.prev {
+  left: 8px;
+}
+
+.next {
+  right: 8px;
+}
+
 h1, h2, h3 {
   font-family: 'Poppins', sans-serif;
 }
 
-h1 {
+.page-text h1 {
   column-span: all;
+  border-bottom: solid 1px #f4e8d7
 }
 
 a {
@@ -78,7 +105,6 @@ img {
 
 .flip-book {
   margin: 0 auto;
-  display: none;
   z-index: 100;
   transition: left 0.5s;
   position: relative;
@@ -115,17 +141,17 @@ img {
   margin: 0px;
   padding: 0px;
   margin-bottom: 10px;
-  border-bottom: solid 1px #f4e8d7
+  border-bottom: double 4px #f4e8d7
 }
 
 .page .page-content .frontpage {
   margin-bottom: 10px;
-  border-bottom: solid 1px #f4e8d7
+  border-bottom: double 4px #f4e8d7
 }
 
 .page .page-content .featured {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 2fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   grid-gap: 8px;
   margin-bottom: 64px;
 }
@@ -147,7 +173,17 @@ img {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   grid-gap: 8px;
+  justify-items: center;
 }
+
+.page-attachments img {
+  max-width: 70%;
+}
+
+.page-attachments pre {
+  width: 100%;
+}
+
 
 .page .page-content .page-text {
   height: 50%;
@@ -186,4 +222,14 @@ img {
 
 .page.page-cover.page-cover-bottom {
   box-shadow: inset 0px 0 30px 0px rgba(36, 10, 3, 0.5), 10px 0 8px 0px rgba(0, 0, 0, 0.4)
+}
+
+@media screen and (max-width: 700px) {
+  .columns {
+    column-width: auto;
+    column-count: 1;
+  }
+  .page {
+    margin-bottom: 32px;
+  }
 }
