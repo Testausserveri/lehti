@@ -7,74 +7,75 @@ let htmlminify = require('html-minifier').minify;
 
 async function build() {
 
-  let contents = {
-    pageflip: fs.readFileSync('src/pageflip.js'),
-    script: fs.readFileSync('src/script.js'),
-    style: fs.readFileSync('src/style.css'),
-  }
-  let articles = [];
-  let paper = [];
-  let magazine = JSON.parse(fs.readFileSync('paper/meta.json'));
-
-  let pn = 1;
-
-  for (let article of fs.readdirSync('paper')) {
-    if (article != 'meta.json') {
-      let data = JSON.parse(fs.readFileSync(`paper/${article}/meta.json`))
-      data.pages = [];
-      data.attachments = [];
-      data.value = 0;
-      data.page = pn;
-      for (let file of fs.readdirSync(`paper/${article}`)) {
-        let name = file.split('.')
-        if (file != "meta.json") {
-          if (name[0] == "thumbnail") {
-            data.thumb = await imageToBase64(`paper/${article}/${file}`);
-          } else if (name[1] == "md") {
-            let content = fs.readFileSync(`paper/${article}/${file}`, 'utf8')
-            data.pages[name[0]-1] = content;
-            data.value += content.length;
-          } else if (name[1] == 'jpg' || name[1] == 'png' || name[1] == 'webp') {
-            let base64 = await imageToBase64(`paper/${article}/${file}`);
-            data.attachments.push({
-              type: 'image',
-              ext: name[1],
-              data: base64
-            });
-          } else {
-            let code = fs.readFileSync(`paper/${article}/${file}`, 'utf8');
-            data.attachments.push({
-              type: 'code',
-              ext: name[1],
-              data: code
-            });
-          }
-        }
-      }
-      articles.push(data);
-      pn+=data.pages.length
+    let contents = {
+        pageflip: fs.readFileSync('src/pageflip.js'),
+        script: fs.readFileSync('src/script.js'),
+        style: fs.readFileSync('src/style.css'),
     }
-  }
+    let articles = [];
+    let paper = [];
+    let magazine = JSON.parse(fs.readFileSync('paper/meta.json'));
 
-  pn = 1;
+    let pn = 1;
 
-  for (const [index, data] of articles.entries()) {
-    let attachpp = Math.ceil(data.attachments.length/data.pages.length);
-
-    for (const [i, page] of data.pages.entries()) {
-      let text = md.render(page);
-      let attach = [];
-      for (let x=i*attachpp;(x<data.attachments.length && x<(i*attachpp)+attachpp);x++) {
-        let attachment = data.attachments[x]
-        if (attachment.type=='image') {
-          attach.push(`<img src="data:image/png;base64,${attachment.data}">`)
-        } else if (attachment.type=='code') {
-          attach.push(`<pre><code>${attachment.data}</code></pre>`)
+    for (let article of fs.readdirSync('paper')) {
+        if (article != 'meta.json') {
+            let data = JSON.parse(fs.readFileSync(`paper/${article}/meta.json`))
+            data.pages = [];
+            data.attachments = [];
+            data.value = 0;
+            data.page = pn;
+            for (let file of fs.readdirSync(`paper/${article}`)) {
+                let name = file.split('.')
+                if (file != "meta.json") {
+                    if (name[0] == "thumbnail") {
+                        data.thumb = await imageToBase64(`paper/${article}/${file}`);
+                    } else if (name[1] == "md") {
+                        let content = fs.readFileSync(`paper/${article}/${file}`, 'utf8')
+                        data.pages[name[0] - 1] = content;
+                        data.value += content.length;
+                    } else if (name[1] == 'jpg' || name[1] == 'png' || name[1] == 'webp') {
+                        let base64 = await imageToBase64(`paper/${article}/${file}`);
+                        data.attachments.push({
+                            type: 'image',
+                            ext: name[1],
+                            data: base64
+                        });
+                    } else {
+                        let code = fs.readFileSync(`paper/${article}/${file}`, 'utf8');
+                        data.attachments.push({
+                            type: 'code',
+                            ext: name[1],
+                            data: code
+                        });
+                    }
+                }
+            }
+            articles.push(data);
+            pn += data.pages.length
         }
-      }
+    }
+
+    pn = 1;
+
+    for (const [index, data] of articles.entries()) {
+        let attachpp = Math.ceil(data.attachments.length / data.pages.length);
+
+        for (const [i, page] of data.pages.entries()) {
+            let text = md.render(page);
+            let attach = [];
+            for (let x = i * attachpp;
+                (x < data.attachments.length && x < (i * attachpp) + attachpp); x++) {
+                let attachment = data.attachments[x]
+                if (attachment.type == 'image') {
+                    attach.push(`<img src="data:image/png;base64,${attachment.data}">`)
+                } else if (attachment.type == 'code') {
+                    attach.push(`<pre><code>${attachment.data}</code></pre>`)
+                }
+            }
 
 
-      paper.push(`
+            paper.push(`
       <div class="page">
           <div class="page-content">
               <h2 class="page-header">${data.title}</h2>
@@ -85,25 +86,32 @@ async function build() {
               <div class="page-text columns">
                   ${text}
               </div>
+              <span class="author">- ${data.author}</span>
               <div class="page-footer">${pn+1}</div>
           </div>
       </div>
     `)
-      pn++;
+            pn++;
+        }
     }
-  }
 
-  articles.sort((a,b) => {
-    if (a.thumb && b.thumb) {return a.value-b.value}
-    else if (a.thumb && !b.thumb) {return -1}
-    else if (!a.thumb && b.thumb) {return 1}
-    else {return 0}
-  });
+    articles.sort((a, b) => {
+        if (a.thumb && b.thumb) {
+            return a.value - b.value
+        } else if (a.thumb && !b.thumb) {
+            return -1
+        } else if (!a.thumb && b.thumb) {
+            return 1
+        } else {
+            return 0
+        }
+    });
 
-  let featured = [];
-  for (let x=0;(x<6 && x<articles.length);x++) {
-    let data = articles[x];
-    featured.push(`
+    let featured = [];
+    for (let x = 0;
+        (x < 6 && x < articles.length); x++) {
+        let data = articles[x];
+        featured.push(`
       <div class="featured-content">
         <h2>${data.title}</h2>
         ${(data.thumb) ? `<img class="thumb" src="data:image/png;base64,${data.thumb}"b>`:''}
@@ -111,8 +119,8 @@ async function build() {
         <a onclick="pageFlip.flip(${data.page})">Sivu ${data.page+1}</a>
       </div>
     `)
-  }
-  paper.unshift(`
+    }
+    paper.unshift(`
    <div class="page">
         <div class="page-content">
           <div class="frontpage">
@@ -129,12 +137,13 @@ async function build() {
             <div class="featured">
                 ${featured.join('\n')}
             </div>
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />Lehden sisältö on lisensoitu <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0</a> -lisenssillä.
             <div class="page-footer">${1}</div>
         </div>
     </div>
   `);
 
-  let html = htmlminify(`
+    let html = htmlminify(`
 <!DOCTYPE html>
 
 <html lang="fi">
@@ -168,12 +177,12 @@ async function build() {
 </script>
 </html>
 `, {
-    minifyCSS: true,
-    minifyJS: true,
-    collapseWhitespace: true
-  });
+        minifyCSS: true,
+        minifyJS: true,
+        collapseWhitespace: true
+    });
 
-  fs.writeFileSync('built.html', html);
+    fs.writeFileSync('built.html', html);
 }
 
 build()

@@ -1,231 +1,240 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@900&family=Ubuntu+Mono&family=Ubuntu:wght@300&display=swap');
 
 * {
-  box-sizing: border-box;
-  font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
 }
 
 .btn {
-  position: fixed;
-  top: 50%;
-  font-size: 32px;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  color: rgb(0, 0, 0);
-  z-index: 100;
-  width: 2em;
-  height: 2em;
-  transition: background-color 0.5s;
-  border: none;
+    position: fixed;
+    top: 50%;
+    font-size: 32px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: rgb(0, 0, 0);
+    z-index: 100;
+    width: 2em;
+    height: 2em;
+    transition: background-color 0.5s;
+    border: none;
 }
 
 .btn:hover {
-  background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 .prev {
-  left: 8px;
+    left: 8px;
 }
 
 .next {
-  right: 8px;
+    right: 8px;
 }
 
-h1, h2, h3 {
-  font-family: 'Poppins', sans-serif;
+h1,
+h2,
+h3 {
+    font-family: 'Poppins', sans-serif;
 }
 
 .page-text h1 {
-  column-span: all;
-  border-bottom: solid 1px #f4e8d7
+    column-span: all;
+    border-bottom: solid 1px #f4e8d7
 }
 
 a {
-  color: #F0F600;
-  text-decoration: none;
+    color: #F0F600;
+    text-decoration: none;
 }
 
 a:hover {
-  cursor: pointer;
-  text-decoration: solid underline #F0F600;
+    cursor: pointer;
+    text-decoration: solid underline #F0F600;
 }
 
 code {
-  background-color:#0d0f17;
-  border-radius: 8px;
-  display: block;
-  color: #BCF8EC;
-  overflow-wrap: normal;
-  padding: 8px;
-  font-family: 'Ubuntu Mono', monospace;
-  font-size: 80%;
+    background-color: #0d0f17;
+    border-radius: 8px;
+    display: block;
+    color: #BCF8EC;
+    overflow-wrap: normal;
+    padding: 8px;
+    font-family: 'Ubuntu Mono', monospace;
+    font-size: 80%;
 }
 
-pre, p {
-  -webkit-column-break-inside: avoid;
-  page-break-inside: avoid;
-  break-inside: avoid;
+pre,
+p {
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
 }
 
 body {
-  overflow-x: hidden;
-  background-color: #000000;
+    overflow-x: hidden;
+    background-color: #000000;
 }
 
 .controls {
-  margin: auto;
-  width: max-content;
-  color: #FFFFFF;
+    margin: auto;
+    width: max-content;
+    color: #FFFFFF;
 }
 
 .columns {
-  column-width: 250px;
-  column-fill: auto;
-  column-count: 3;
+    column-width: 250px;
+    column-fill: auto;
+    column-count: 3;
+}
+
+.author {
+    text-align: right;
 }
 
 img {
-  max-width: 100%;
+    max-width: 100%;
 }
 
 .frontpage h1 {
-  margin: 0px;
-  font-size: 64px;
-  font-family: 'Poppins', sans-serif;
+    margin: 0px;
+    font-size: 64px;
+    font-family: 'Poppins', sans-serif;
 }
 
 .info {
-  display: flex;
-  font-size: 0.8em;
-  width: 100%;
+    display: flex;
+    font-size: 0.8em;
+    width: 100%;
 }
 
 .info div {
-  flex-grow: 1;
+    flex-grow: 1;
 }
 
 .flip-book {
-  margin: 0 auto;
-  z-index: 100;
-  transition: left 0.5s;
-  position: relative;
-  top: 0px;
-  left: 100%;
+    margin: 0 auto;
+    z-index: 100;
+    transition: left 0.5s;
+    position: relative;
+    top: 0px;
+    left: 100%;
 }
 
 .html-book {
-  background-size: cover
+    background-size: cover
 }
 
 .page {
-  padding: 20px;
-  background-color: #161b2b;
-  color: #FFFFFF;
-  border: solid 1px #c2b5a3;
-  overflow: hidden
+    padding: 20px;
+    background-color: #161b2b;
+    color: #FFFFFF;
+    border: solid 1px #c2b5a3;
+    overflow: hidden
 }
 
 .page .page-content {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: stretch
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch
 }
 
 .page .page-content .page-header {
-  height: 30px;
-  font-size: 100%;
-  text-transform: uppercase;
-  text-align: left;
-  margin: 0px;
-  padding: 0px;
-  margin-bottom: 10px;
-  border-bottom: double 4px #f4e8d7
+    height: 30px;
+    font-size: 100%;
+    text-transform: uppercase;
+    text-align: left;
+    margin: 0px;
+    padding: 0px;
+    margin-bottom: 10px;
+    border-bottom: double 4px #f4e8d7
 }
 
 .page .page-content .frontpage {
-  margin-bottom: 10px;
-  border-bottom: double 4px #f4e8d7
+    margin-bottom: 10px;
+    border-bottom: double 4px #f4e8d7
 }
 
 .page .page-content .featured {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  grid-gap: 8px;
-  margin-bottom: 64px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-gap: 8px;
+    margin-bottom: 64px;
 }
 
 .featured-content {
-  background-color:#0d0f17;
-  border-radius: 8px;
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
+    background-color: #0d0f17;
+    border-radius: 8px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
 }
 
 .featured-content p {
-  flex-grow: 1;
+    flex-grow: 1;
 }
 
 .page .page-content .page-attachments {
-  flex-shrink: 1;
-  display: flex;
-  flex-flow: row wrap;
+    flex-shrink: 1;
+    display: flex;
+    flex-flow: row wrap;
 }
 
 .page-attachments img {
-  max-width: 70%;
-  margin: auto;
+    max-width: 70%;
+    margin: auto;
 }
 
 .page .page-content .page-text {
-  height: 50%;
-  flex-grow: 1;
-  margin-top: 0px;
-  padding-top: 0px;
-  box-sizing: border-box;
+    height: 50%;
+    flex-grow: 1;
+    margin-top: 0px;
+    padding-top: 0px;
+    box-sizing: border-box;
 }
 
 .page .page-content .page-footer {
-  height: 30px;
-  border-top: solid 1px #f4e8d7;
-  font-size: 80%;
-  color: #ffffff
+    height: 30px;
+    border-top: solid 1px #f4e8d7;
+    font-size: 80%;
+    color: #ffffff
 }
 
 .page.--left {
-  border-right: 0;
-  box-shadow: inset -7px 0 30px -7px rgba(0, 0, 50, 1)
+    border-right: 0;
+    box-shadow: inset -7px 0 30px -7px rgba(0, 0, 50, 1)
 }
 
 .page.--right {
-  border-left: 0;
-  box-shadow: inset 7px 0 30px -7px rgba(0, 0, 50, 1)
+    border-left: 0;
+    box-shadow: inset 7px 0 30px -7px rgba(0, 0, 50, 1)
 }
 
 .page.--right .page-footer {
-  text-align: right
+    text-align: right
 }
 
 .page.page-cover.page-cover-top {
-  box-shadow: inset 0px 0 30px 0px rgba(36, 10, 3, 0.5), -2px 0 5px 2px rgba(0, 0, 0, 0.4)
+    box-shadow: inset 0px 0 30px 0px rgba(36, 10, 3, 0.5), -2px 0 5px 2px rgba(0, 0, 0, 0.4)
 }
 
 .page.page-cover.page-cover-bottom {
-  box-shadow: inset 0px 0 30px 0px rgba(36, 10, 3, 0.5), 10px 0 8px 0px rgba(0, 0, 0, 0.4)
+    box-shadow: inset 0px 0 30px 0px rgba(36, 10, 3, 0.5), 10px 0 8px 0px rgba(0, 0, 0, 0.4)
 }
 
 @media screen and (max-width: 700px) {
-  .columns {
-    column-width: auto;
-    column-count: 1;
-  }
-  .page {
-    margin-bottom: 32px;
-  }
-  .page-attachments img {
-    max-width: 100%;
-  }
+    .columns {
+        column-width: auto;
+        column-count: 1;
+    }
+
+    .page {
+        margin-bottom: 32px;
+    }
+
+    .page-attachments img {
+        max-width: 100%;
+    }
 }
