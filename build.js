@@ -183,6 +183,7 @@ async function build() {
     });
 
     fs.writeFileSync('built.html', html);
+    fs.writeFileSync('doc/index.html', html);
 }
 
 build()
