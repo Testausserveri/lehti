@@ -1,0 +1,7 @@
+# Ensimmäinen testiartikkeli #
+
+Tämä ensimmäinen testausartikkeli testaa ohjeiden luettavuutta. Ohjeet ovat - varsin ymmärrettävästi - vielä jokseenkin sekavat. Ensimmäinen askel, forkkaa repo, on täysin selkeä ja onnistui ongelmitta. Jo heti seuraava pykälä, luo kansio, osoittautui monimerkitykselliseksi. Lyhyen debatin jälkeen selvisi kansion toivottu sijainti, eli oma hengentuote laitetaan kansioon "paper"-kansion sisällä. Nyt päästään nykyhetkeen ja artikkelin kirjoittamiseen. Kirjoittaminen onkin aika tylsää ja tikusta on vaikea vääntää. Seuraava kappale on lorem ipsumia. (66 sanaa, n 500 merkkiä)  
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo sed egestas egestas fringilla phasellus faucibus scelerisque. Enim sit amet venenatis urna cursus eget nunc scelerisque viverra. Sit amet facilisis magna etiam tempor orci. Consectetur libero id faucibus nisl tincidunt eget nullam. Lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi. Consequat interdum varius sit amet mattis vulputate enim. Felis eget nunc lobortis mattis aliquam. Volutpat diam ut venenatis tellus in metus vulputate eu. Ultrices gravida dictum fusce ut. (88 sanaa, yht 150)  
+
+Samalla tämä on pikakurssi Githubin käyttöön. Ensimmäinen forkki, ensimmäinen PR.. Ja nännä nähdä mitä nodejs mahtaa käytännössä tarkottaa. Sentään markdown on mukavaa kirjoitella. Täytyy etsiä muutama kiva kuva, tylsää pelkkä teksti. Tämä oli mielenkiintoista, jatkuu myöhemmin. (200 sanaa)
