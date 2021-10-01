@@ -13,9 +13,9 @@ Testauslehti. Alustavasti julkaistaan HTML-tiedostoina.
 5. Katso lehden ulkoasu suorittamalla build.js (`npm run build`). Jos dependencyjä puuttuu niin asenna ne (`npm install`), ja jos nodejs puuttuu, [asenna se](https://nodejs.org/). Skripti rakentaa lehden built.html tiedostoon, jonka voit avata selaimellasi.
 6. Kun artikkeli on valmis, tee pull request.
 
-##
-Lehden taittamisesta vastaava algoritimi asettelee artikkelin kansioon laitetut liitetiedostot tasaisesti sivuille. Liitteiksi käyvät .png, .jpg ja .webp -tiedostot sekä dokumentit, jotka esitetään raakatekstinä.
-"meta.json"-tiedosto sisältää artikkelin tiedot, ja se on pakollinen joka artikkelin kansiossa. paper/ kansiossa on lehden metadata.
+## Liitteet??? Metatiedostot???
+Liitetiedostoihin tulee merkitä sivu, jolle tiedosto liitetään ensin, sitten alaviiva ja liitteen nimi, esimerkiksi 2_kuva.png tai 3_skripti.py. Liitteiksi käyvät .png, .jpg ja .webp -tiedostot sekä dokumentit, jotka esitetään raakatekstinä.
+"meta.json"-tiedosto sisältää artikkelin tiedot, ja se on pakollinen joka artikkelin kansiossa. paper/ kansiossa on taas itse lehden metadata.
 
 Artikkelin meta.json voi esimerkiksi näyttää tältä:
 ```json
