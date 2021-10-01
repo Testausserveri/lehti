@@ -3,5 +3,24 @@
     "html-minifier": "^4.0.0",
     "image-to-base64": "^2.2.0",
     "markdown-it": "^12.2.0"
-  }
+  },
+  "name": "lehti",
+  "description": "Ikuisuusprojektit maistuu",
+  "version": "0.0.0",
+  "main": "build.js",
+  "devDependencies": {},
+  "scripts": {
+    "build": "node ./build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Testausserveri/lehti.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Testausserveri/lehti/issues"
+  },
+  "homepage": "https://github.com/Testausserveri/lehti#readme"
 }

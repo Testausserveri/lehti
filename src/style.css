@@ -55,19 +55,28 @@ a:hover {
 code {
     background-color: #0d0f17;
     border-radius: 8px;
-    display: block;
     color: #BCF8EC;
     overflow-wrap: normal;
     padding: 8px;
     font-family: 'Ubuntu Mono', monospace;
     font-size: 80%;
+    display: inline;
+}
+
+pre code {
+    display: block;
 }
 
 pre,
-p {
+p,
+li {
     -webkit-column-break-inside: avoid;
     page-break-inside: avoid;
     break-inside: avoid;
+}
+
+li {
+    margin-bottom: 8px;
 }
 
 body {
