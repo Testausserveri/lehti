@@ -79,6 +79,21 @@ li {
     margin-bottom: 8px;
 }
 
+table {
+    border-collapse: collapse;
+}
+
+td {
+  border: solid 1px white;
+  padding: 4px
+}
+
+th {
+  border: 1px solid white;
+  border-bottom: double 4px white;
+  padding: 4px
+}
+
 body {
     overflow-x: hidden;
     background-color: #000000;

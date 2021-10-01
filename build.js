@@ -36,14 +36,18 @@ async function build() {
                         data.value += content.length;
                     } else if (name[1] == 'jpg' || name[1] == 'png' || name[1] == 'webp') {
                         let base64 = await imageToBase64(`paper/${article}/${file}`);
-                        data.attachments.push({
+                        let page = file.split('_')[0];
+                        if (data.attachments[page-1]===undefined) {data.attachments[page-1]=[]}
+                        data.attachments[page-1].push({
                             type: 'image',
                             ext: name[1],
                             data: base64
                         });
                     } else {
                         let code = fs.readFileSync(`paper/${article}/${file}`, 'utf8');
-                        data.attachments.push({
+                        let page = file.split('_')[0];
+                        if (data.attachments[page-1]===undefined) {data.attachments[page-1]=[]}
+                        data.attachments[page-1].push({
                             type: 'code',
                             ext: name[1],
                             data: code
@@ -59,20 +63,18 @@ async function build() {
     pn = 1;
 
     for (const [index, data] of articles.entries()) {
-        let attachpp = Math.ceil(data.attachments.length / data.pages.length);
-
         for (const [i, page] of data.pages.entries()) {
             let text = md.render(page);
             let attach = [];
-            for (let x = i * attachpp;
-                (x < data.attachments.length && x < (i * attachpp) + attachpp); x++) {
-                let attachment = data.attachments[x]
-                if (attachment.type == 'image') {
-                    attach.push(`<img src="data:image/png;base64,${attachment.data}">`)
-                } else if (attachment.type == 'code') {
-                    attach.push(`<pre><code>${attachment.data}</code></pre>`)
+            if (data.attachments[i] != undefined) {
+                for (let attachment of data.attachments[i]) {
+                    if (attachment.type == 'image') {
+                        attach.push(`<img src="data:image/png;base64,${attachment.data}">`)
+                    } else if (attachment.type == 'code') {
+                        attach.push(`<pre><code>${attachment.data}</code></pre>`)
+                    }
                 }
-            }
+            }  
 
 
             paper.push(`
