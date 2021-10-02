@@ -4,6 +4,12 @@ Ikuisuusprojektit maistuu
 Testauslehti. Alustavasti julkaistaan HTML-tiedostoina. 
 "build.js"-nodejs skripti tekee valmiin html:n paper-kansioissa olevista artikkeleista.
 
+## Kuinka voin auttaa?
+Voit tietenkin itse kirjoittaa artikkeleita seuraavien ohjeiden mukaan, mutta voit myös ehdottaa aiheita joista haluaisit lukea. Parhaiten se sujuu [github issuesin](https://github.com/Testausserveri/lehti/issues/) kautta. Laita toki artikkeliehdotuksiin "Article suggestion"-label.
+
+## Kuinka lehti tilataan?
+Se selviää ajan myötä.
+
 ## Kuinka tehdään artikkeleita
 
 1. Forkkaa github repo [https://github.com/Testausserveri/lehti](https://github.com/Testausserveri/lehti)
