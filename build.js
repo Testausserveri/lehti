@@ -185,7 +185,7 @@ async function build() {
     });
 
     fs.writeFileSync('built.html', html);
-    fs.writeFileSync('docs/index.html', html);
+    fs.writeFileSync('docs/paper.html', html);
 }
 
 build()

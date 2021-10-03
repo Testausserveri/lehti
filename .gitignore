@@ -1,3 +1,4 @@
 /node_modules
 built.html
 docs/index.html
+.env
