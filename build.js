@@ -78,7 +78,7 @@ async function build() {
 
 
             paper.push(`
-      <div class="page">
+      <div class="page" id="${pn+1}">
           <div class="page-content">
               <h2 class="page-header">${data.title}</h2>
               ${(attach.length>0) ? `
@@ -118,7 +118,7 @@ async function build() {
         <h2>${data.title}</h2>
         ${(data.thumb) ? `<img class="thumb" src="data:image/png;base64,${data.thumb}"b>`:''}
         <p>${data.description}</p>
-        <a onclick="pageFlip.flip(${data.page})">Sivu ${data.page+1}</a>
+        <a href="#${data.page+1}">Sivu ${data.page+1}</a>
       </div>
     `)
     }

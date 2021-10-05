@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // triggered by page turning
         pageFlip.on("flip", (e) => {
+            window.location.hash=e.data+1
             document.querySelector(".page-current").innerText = e.data + 1;
             if (pageFlip.getOrientation()=='landscape') {
                 if (e.data==0) {
@@ -63,6 +64,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        window.addEventListener('hashchange', (e) => {
+            if (window.location.hash.substr(1)-1 != pageFlip.getCurrentPageIndex()) {
+                pageFlip.flip(window.location.hash.substr(1)-1)
+            }
+        });
+
         if (pageFlip.getOrientation()=='landscape') {
             document.getElementById('book').style=`left: -25%`;
         } else {
@@ -73,4 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector(".prev").style="display: none";
         document.querySelector(".next").style="display: none";
     }
+
+    pageFlip.flip(window.location.hash.substr(1)-1)
 });
