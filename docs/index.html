@@ -11,9 +11,11 @@
 
 <body>
   <h1>Testauslehti</h1>
-  <div class='page' id='a'>
+  <div>
     <p>Tilaa Testaaja-lehti joko Discordiisi tai sähköpostiisi!</p>
     <p>Lehden kehitysversion esikatselu on näkyvissä osoitteessa <a href="./paper.html">https://lehti.testausserveri.fi/paper.html</a></p>
+  </div>
+  <div class='page' id='a'>
     <button onclick="window.location.href='https\:\/\/discord.com/api/oauth2/authorize?client_id=893857603518603295&redirect_uri=https%3A%2F%2Fpostman.haka.workers.dev%2Fdiscord&response_type=code&scope=identify'">Discord</button>
     <button onclick="page('email')">E-mail</button>
   </div>
@@ -28,7 +30,16 @@
 
 <script>
   function page(target) {
-	for (element of document.getElementsByClassName('page')) {element.style='display:none'}
-	document.getElementById(target).style='display:block'
-}
+    for (element of document.getElementsByClassName('page')) {element.style='display:none'}
+    document.getElementById(target).style='display:block'
+  }
+  switch (window.location.hash.substr(1)) {
+    case 'unsub':
+      window.alert('Tilauksesi on nyt peruutettu!')
+      break
+    case 'sub':
+      window.alert('Tilauksesi on nyt aktiivinen!')
+      break
+  }
+  window.location.hash=""
 </script>
