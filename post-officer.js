@@ -20,7 +20,8 @@ client.once('ready', async () => {
       .setColor('#ce1b18')
       .setTitle('Testaaja-lehti on saapunut postilaatikkoosi!')
       .setURL('https://lehti.testausserveri.fi/')
-      .setDescription(`Lataa lehti.html koneellesi ja avaa se selaimella, niin pääset selaamaan lehteä.\n:( Jos et halua lehteä, unsubaa: \nhttps://postman.haka.workers.dev/unsub/discord/${postbox.id}`)
+      .setDescription(`Lataa lehti.html koneellesi ja avaa se selaimella, niin pääset selaamaan lehteä.`)
+      .addField('Etkö halua lehteä? :(',`[unsubaa](https://postman.haka.workers.dev/unsub/discord/${postbox.id})`)
       .setTimestamp()
       .setFooter('Postin tuo, postin tuo...');
     await user.send({embeds: [embed]});
