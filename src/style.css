@@ -58,17 +58,24 @@ a:hover {
 
 code {
     background-color: #0d0f17;
-    border-radius: 8px;
     color: #BCF8EC;
     overflow-wrap: normal;
-    padding: 8px;
     font-family: 'Ubuntu Mono', monospace;
     font-size: 80%;
     display: inline;
 }
 
+code {
+    padding: 2px;
+    border-radius: 2px;
+}
+
 pre code {
     display: block;
+    overflow: auto !important;
+    background-attachment: fixed !important;
+    padding: 8px;
+    border-radius: 8px;
 }
 
 pre,
