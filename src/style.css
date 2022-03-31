@@ -116,12 +116,6 @@ body {
     color: #FFFFFF;
 }
 
-.columns {
-    column-width: 250px;
-    column-fill: auto;
-    column-count: 3;
-}
-
 .author {
     text-align: right;
 }
@@ -132,7 +126,7 @@ img {
 
 .frontpage h1 {
     margin: 0px;
-    font-size: 64px;
+    font-size: 600%;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -160,11 +154,12 @@ img {
 }
 
 .page {
-    padding: 20px;
+    padding: 3%;
     background-color: #161b2b;
     color: #FFFFFF;
     border: solid 1px #c2b5a3;
-    overflow: hidden
+    overflow: hidden;
+    font-size: 100%;
 }
 
 .page .page-content {
@@ -194,7 +189,7 @@ img {
 
 .page .page-content .featured {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: 3;
     grid-gap: 8px;
     margin-bottom: 64px;
 }

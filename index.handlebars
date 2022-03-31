@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html lang="fi">
+
+<head>
+	<title>Testauslehti</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<style>
+		{{{contents.style}}}
+	</style>
+</head>
+
+<body>
+	<div class="container" id="book-container">
+		<div class="flip-book" id="book">
+			<div class="page">
+				<div class="page-content">
+					<div class="frontpage">
+						<h1>Testaaja</h1>
+						<div class="info">
+							<div>- Lehti joka devaajalle</div>
+							<div>Nro {{magazine.issue}}, {{magazine.date}}</div>
+							<div>Yhteystietoja tähän</div>
+						</div>
+					</div>
+					<div class="page-text">
+						{{{magazine.frontpage}}}
+						<div class="featured">
+							{{#each featured}}
+							<div class="featured-content">
+								<h2>{{title}}</h2>
+								{{#if thumb}}
+								<img class="thumb" src="data:image/png;base64,{{thumb}}">
+								{{/if}}
+								<p>{{description}}</p>
+								<a href="#{{page}}">Sivu {{page}}</a>
+							</div>
+							{{/each}}
+						</div>
+					</div>
+					<div class="page-footer">
+						Lehden sisältö on lisensoitu 
+						<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+							Creative Commons Attribution 4.0
+						</a> -lisenssillä.<br>
+						<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+							<img
+								alt="Creative Commons License" style="border-width:0"
+								src="https://i.creativecommons.org/l/by/4.0/88x31.png" />
+						</a>
+					</div>
+				</div>
+			</div>
+			{{#each articles}}
+			{{#each pages}}
+			<div class="page" id="{{../page}}">
+				<div class="page-content">
+					<h2 class="page-header">{{../title}}</h2>
+					{{#if attachments}}
+					<div class="page-attachments">
+						{{#each attachments}}
+							{{{this}}}
+						{{/each}}
+					</div>
+					{{/if}}
+					<div class="page-text columns">
+						{{{content}}}
+					</div>
+					<span class="author">- {{../author}}</span>
+					<div class="page-footer">{{page}}</div>
+				</div>
+			</div>
+			{{/each}}
+			{{/each}}
+		</div>
+	</div>
+	<div class="container controls">
+		<div>
+			<button type="button" class="btn prev">&lt;</button>
+			[<span class="page-current">1</span> / <span class="page-total">-</span>]
+			<button type="button" class="btn next">&gt;</button>
+		</div>
+	</div>
+</body>
+<script>
+	{{{contents.pageflip}}}
+	{{{contents.script}}}
+</script>
+
+</html>

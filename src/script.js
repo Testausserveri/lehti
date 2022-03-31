@@ -5,21 +5,18 @@ document.addEventListener('DOMContentLoaded', () => {
         pageFlip = new PageFlip(
             document.getElementById("book"),
             {
-                width: 315,
-                height: 420,
+                width: 210,
+                height: 297,
 
                 size: "stretch",
-                
-                minWidth: 600,
-                maxWidth: 1000,
-                minHeight: 420,
-                maxHeight: 3000,
 
                 maxShadowOpacity: 1,
                 showCover: true,
                 mobileScrollSupport: true,
 
-                useMouseEvents: false
+                useMouseEvents: false,
+
+				flippingTime: 500,
             }
         );
 
@@ -64,6 +61,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+		function refresh() {
+			let width = 0;
+            for (element of document.getElementsByClassName("page-content")) {
+                if (element.offsetWidth > 0) {
+                    width = element.offsetWidth;
+                    break
+                }
+            }
+            for (element of document.getElementsByClassName("page-content")) {
+                element.style.fontSize = `${width*0.015}px`;
+            }
+		}
+
+        window.addEventListener('resize', refresh);
+
         window.addEventListener('hashchange', (e) => {
             if (window.location.hash.substr(1)-1 != pageFlip.getCurrentPageIndex()) {
                 pageFlip.flip(window.location.hash.substr(1)-1)
@@ -75,11 +87,18 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             document.getElementById('book').style="left: 0px";
         }
+		pageFlip.on('changeState', (e) => {
+			if (e.data == "read") {
+				refresh()
+			}
+		}
+	);
+
     } else {
         document.getElementById('book').style="left: 0px";
         document.querySelector(".prev").style="display: none";
         document.querySelector(".next").style="display: none";
     }
 
-    pageFlip.flip(window.location.hash.substr(1)-1)
+    pageFlip.flip(window.location.hash.substring(1)-1)
 });
