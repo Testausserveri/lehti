@@ -14,7 +14,7 @@ async function build() {
         style: fs.readFileSync('src/style.css'),
     }
 
-	let template = Handlebars.compile(fs.readFileSync("index.handlebars", "utf8"));
+	let template = Handlebars.compile(fs.readFileSync("src/index.handlebars", "utf8"));
     let articles = [];
     let magazine = JSON.parse(fs.readFileSync('paper/meta.json'));
 

@@ -1,7 +1,7 @@
 let pageFlip = {};
 
-document.addEventListener('DOMContentLoaded', () => {
-    if (document.body.offsetWidth > 700) {
+document.addEventListener('DOMContentLoaded', async () => {
+    if (document.body.offsetWidth > 800) {
         pageFlip = new PageFlip(
             document.getElementById("book"),
             {
@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 height: 297,
 
                 size: "stretch",
+				minWidth: 800,
+				
 
                 maxShadowOpacity: 1,
                 showCover: true,
@@ -69,30 +71,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     break
                 }
             }
-            for (element of document.getElementsByClassName("page-content")) {
-                element.style.fontSize = `${width*0.015}px`;
-            }
+            document.querySelector("html").style.fontSize = `${width*0.018}px`;
 		}
 
         window.addEventListener('resize', refresh);
 
-        window.addEventListener('hashchange', (e) => {
-            if (window.location.hash.substr(1)-1 != pageFlip.getCurrentPageIndex()) {
-                pageFlip.flip(window.location.hash.substr(1)-1)
-            }
-        });
+		setTimeout(refresh,100)
 
         if (pageFlip.getOrientation()=='landscape') {
             document.getElementById('book').style=`left: -25%`;
         } else {
             document.getElementById('book').style="left: 0px";
         }
-		pageFlip.on('changeState', (e) => {
-			if (e.data == "read") {
-				refresh()
-			}
-		}
-	);
 
     } else {
         document.getElementById('book').style="left: 0px";
@@ -101,4 +91,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     pageFlip.flip(window.location.hash.substring(1)-1)
+
+	window.addEventListener('hashchange', (e) => {
+		if (window.location.hash.substr(1)-1 != pageFlip.getCurrentPageIndex()) {
+			pageFlip.flip(window.location.hash.substring(1)-1)
+		}
+	});
+	
 });
