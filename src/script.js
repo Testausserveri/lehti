@@ -65,24 +65,47 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 		function refresh() {
 			let width = 0;
+			let height = 0;
             for (element of document.getElementsByClassName("page-content")) {
                 if (element.offsetWidth > 0) {
                     width = element.offsetWidth;
-                    break
+					break
                 }
             }
             document.querySelector("html").style.fontSize = `${width*0.018}px`;
+			for (element of document.querySelectorAll(".columns > *")) {
+				let height = element.parentElement.offsetHeight
+				if (element.offsetHeight > 0) {
+					let style = window.getComputedStyle(element);
+					element.style.gridRow = `span ${
+						Math.ceil(
+							(element.offsetHeight
+								+ toPx(element, style.marginTop, "height")
+								+ toPx(element, style.marginBottom, "height")
+							) / height * 40)
+					}`
+					if (element.tagName == "PRE" || element.tagName == "TABLE") {
+						element.style.gridColumn = `span ${Math.ceil(element.offsetWidth / height * 3)}`
+					}
+				}
+			}
 		}
 
         window.addEventListener('resize', refresh);
 
-		setTimeout(refresh,100)
+		pageFlip.on("changeState", (e) => {
+			if (e.data == "read") {
+				setTimeout(refresh,10)
+			}
+		})
 
         if (pageFlip.getOrientation()=='landscape') {
             document.getElementById('book').style=`left: -25%`;
         } else {
             document.getElementById('book').style="left: 0px";
         }
+
+		setTimeout(refresh,10)
 
     } else {
         document.getElementById('book').style="left: 0px";

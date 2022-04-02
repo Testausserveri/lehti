@@ -41,12 +41,18 @@ html {
 h1,
 h2,
 h3 {
-	font-family: Poppins, sans-serif
+	font-family: Poppins, sans-serif;
+	margin-bottom: 0px;
 }
 
 .page-text h1 {
-	column-span: all;
-	border-bottom: solid 1px #f4e8d7
+	border-bottom: solid 1px #f4e8d7;
+	grid-column: span 3;
+}
+
+p {
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem
 }
 
 a {
@@ -54,12 +60,13 @@ a {
 	text-decoration: none
 }
 
+
 a:hover {
 	cursor: pointer;
 	text-decoration: solid underline #f0f600
 }
 
-code {
+code, code * {
 	background-color: #0d0f17;
 	color: #bcf8ec;
 	overflow-wrap: normal;
@@ -90,7 +97,7 @@ pre {
 }
 
 li {
-	margin-bottom: 2rem
+	margin-bottom: 1rem
 }
 
 table {
@@ -125,7 +132,8 @@ body {
 .frontpage h1 {
 	margin: 0;
 	font-size: 6rem;
-	font-family: Poppins, sans-serif
+	font-family: Poppins, sans-serif;
+	margin-top: -2rem
 }
 
 .info {
@@ -187,9 +195,10 @@ body {
 
 .page .page-content .featured {
 	display: grid;
-	grid-template-columns: 3;
+	grid-template-columns: repeat(3,auto);
 	grid-gap: 1rem;
-	margin-bottom: 4rem
+	margin-bottom: 4rem;
+	margin-top: 4rem
 }
 
 .featured-content {
@@ -202,6 +211,10 @@ body {
 
 .featured-content p {
 	flex-grow: 1
+}
+
+.featured-content img {
+	width:100%
 }
 
 .page .page-content .page-attachments {
@@ -222,6 +235,23 @@ body {
 	margin-top: 0;
 	padding-top: 0;
 	box-sizing: border-box
+}
+
+.columns {
+	display: grid;
+	grid-auto-flow: column;
+	grid-template-columns: repeat(3, calc(100% /3));
+	grid-template-rows: repeat(40, calc(100% /40));
+	grid-column-gap: 1em;
+}
+
+.columns > * {
+	height: fit-content;
+}
+
+.columns > pre, .columns > table {
+	width:max-content;
+	margin-top: 0.5rem
 }
 
 .page .page-content .page-footer {
@@ -266,4 +296,37 @@ body {
 	.page-attachments img {
 		max-width: 100%
 	}
+}
+
+
+pre .hljs-comment {
+	color: #969896;
+}
+
+pre .hljs-title, pre .hljs-type {
+	color:#00b7ff
+}
+
+pre .hljs-variable, pre .hljs-attribute, pre .hljs-tag, pre .hljs-regexp {
+color: #5fff87;
+}
+
+pre .hljs-number, pre .hljs-preprocessor, pre .hljs-built_in, pre .hljs-literal, pre .hljs-params, pre .hljs-constant {
+color: #ad00ff;
+}
+
+pre .hljs-class {
+color: #e7c547;
+}
+
+pre .hljs-string, pre .hljs-value {
+color: #00b7ff;
+}
+
+pre .hljs-function {
+color: #7aa6da;
+}
+
+pre .hljs-keyword {
+color: #ac13b9;
 }

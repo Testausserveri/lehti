@@ -11,6 +11,7 @@ async function build() {
     let contents = {
         pageflip: fs.readFileSync('src/pageflip.js'),
         script: fs.readFileSync('src/script.js'),
+		units: fs.readFileSync('src/units.js'),
         style: fs.readFileSync('src/style.css'),
     }
 
