@@ -74,6 +74,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
             document.querySelector("html").style.fontSize = `${width*0.018}px`;
 			for (element of document.querySelectorAll(".columns > *")) {
+				if (element.offsetHeight > 0) {
+					element.style = "";
+				}
+			}
+			for (element of document.querySelectorAll(".columns > *")) {
 				let height = element.parentElement.offsetHeight
 				if (element.offsetHeight > 0) {
 					let style = window.getComputedStyle(element);
@@ -87,6 +92,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 					if (element.tagName == "PRE" || element.tagName == "TABLE") {
 						element.style.gridColumn = `span ${Math.ceil(element.offsetWidth / height * 3)}`
 					}
+					element.style.maxWidth = "100%"
 				}
 			}
 		}
@@ -105,7 +111,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.getElementById('book').style="left: 0px";
         }
 
-		setTimeout(refresh,10)
+		setTimeout(refresh,100)
 
     } else {
         document.getElementById('book').style="left: 0px";
@@ -116,7 +122,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     pageFlip.flip(window.location.hash.substring(1)-1)
 
 	window.addEventListener('hashchange', (e) => {
-		if (window.location.hash.substr(1)-1 != pageFlip.getCurrentPageIndex()) {
+		if (window.location.hash.substring(1)-1 != pageFlip.getCurrentPageIndex()) {
 			pageFlip.flip(window.location.hash.substring(1)-1)
 		}
 	});
